@@ -385,6 +385,169 @@ $transition-speed: 0.4s;
 }
 
 
+// Variables
+$primary-color: #fff;
+$secondary-color: #f8bb33;
+$card-bg-color: #cd9a34;
+$dark-text: #333;
+$transition-speed: 0.3s;
+$border-radius: 8px;
+$box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
+// Services Section
+.services {
+  padding: 5rem 1rem;
+  background-color: #f9f9f9;
+  
+  &__container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  &__title {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 1rem;
+    color: $dark-text;
+  }
+  
+  &__subtitle {
+    text-align: center;
+    font-size: 1.1rem;
+    margin-bottom: 3rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    color: $dark-text;
+  }
+  
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-bottom: 3rem;
+    
+    @media (max-width: 992px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    @media (max-width: 576px) {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+  }
+  
+  &__card {
+    display: flex;
+    background-color: $card-bg-color;
+    border-radius: $border-radius;
+    overflow: hidden;
+    box-shadow: $box-shadow;
+    transition: transform $transition-speed, box-shadow $transition-speed;
+    height: 100%;
+    min-height: 120px;
+    
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    }
+  }
+  
+  &__icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    background-color: $card-bg-color;
+    width: 100px;
+    flex-shrink: 0;
+  }
+  
+  &__icon {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    filter: brightness(0) invert(1); 
+  }
+  
+  &__content {
+    padding: 1.5rem 1.5rem 1.5rem 0;
+    color: $primary-color;
+    flex-grow: 1;
+  }
+  
+  &__card-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+  }
+  
+  &__card-text {
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+  
+  &__action {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+  }
+  
+  &__button {
+    display: inline-block;
+    background-color: $dark-text;
+    color: $primary-color;
+    padding: 0.8rem 2rem;
+    border-radius: $border-radius;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color $transition-speed, transform $transition-speed;
+    
+    &:hover, &:focus {
+      background-color: color.adjust($dark-text, $lightness: -10%);
+      transform: translateY(-2px);
+    }
+  }
+}
+
+// Animációk
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+@media (max-width: 768px) {
+  .services {
+    padding: 4rem 1rem;
+    
+    &__title {
+      font-size: 2rem;
+    }
+    
+    &__card {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    
+    &__icon-wrapper {
+      width: 100%;
+      padding: 1.5rem 1.5rem 0.5rem 1.5rem;
+    }
+    
+    &__content {
+      padding: 0.5rem 1.5rem 1.5rem 1.5rem;
+    }
+  }
+}
+
 // Media Queries
 @mixin responsive($breakpoint) {
   @if $breakpoint == tablet {
