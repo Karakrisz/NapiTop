@@ -1,3 +1,4 @@
+@use 'sass:color';
 // Variables
 $primary-color: #fff;
 $secondary-color: #155b9b;
@@ -95,7 +96,7 @@ a {
 }
 
 p {
-  font-size: 2rem;
+  font-size: 1rem;
   font-weight: 400;
 }
 
@@ -229,38 +230,160 @@ ul {
 
 // Hero Container Styles
 
-#colorbgcanvas {
-  width: 100% !important;
-  height: 100% !important;
-}
+// Variables
+$primary-color: #fff;
+$secondary-color: #f8bb33;
+$text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+$transition-speed: 0.4s;
 
-.hero-container {
-  top: 50%; 
-  left: 50%;
-  transform: translate(-50%, -50%);
-  &__content {
-    &__logo {
+// Hero Section
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 600px;
+  overflow: hidden;
+
+  &__slider {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  &__slider-track {
+    display: flex;
+    width: 500%;
+    height: 100%;
+    transition: transform $transition-speed ease-in-out;
+  }
+
+  &__slide {
+    position: relative;
+    width: 20%;
+    height: 100%;
+    flex-shrink: 0;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
-      margin: 7em 0;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.4);
+      z-index: 1;
     }
-    &__title {
-      font-size: 2rem;
-      margin: 0;
+  }
+
+  &__slide-content {
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    transform: translateY(-50%);
+    max-width: 600px;
+    color: $primary-color;
+    z-index: 2;
+    padding: 2rem;
+  }
+
+  &__title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+    text-shadow: $text-shadow;
+    text-transform: uppercase;
+  }
+
+  &__subtitle {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    text-shadow: $text-shadow;
+    border-bottom: 1px solid $primary-color;
+    padding-bottom: 1rem;
+  }
+
+  &__description {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    text-shadow: $text-shadow;
+  }
+
+  &__cta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  &__cta-text {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    text-shadow: $text-shadow;
+  }
+
+  &__button {
+    display: inline-block;
+    padding: 0.8rem 2rem;
+    background-color: $secondary-color;
+    color: #000;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 4px;
+    transition: background-color 0.3s, transform 0.3s;
+
+    &:hover,
+    &:focus {
+      background-color: color.adjust($secondary-color, $lightness: -10%);
+      transform: translateY(-2px);
     }
-    &__button {
-      @include flex-center;
+  }
+
+  &__image-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__navigation {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 1rem;
+    z-index: 3;
+  }
+
+  &__nav-dot {
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+    border: none;
+    cursor: pointer;
+    transition: background-color $transition-speed;
+
+    &--active {
       background-color: $primary-color;
-      color: $black;
-      padding: 0.5em 1.7em;
-      border-radius: 1.3em;
-      justify-self: center;
-      &__icon {
-        width: 1.5rem;
-        margin-right: 0.7em;
-      }
+    }
+
+    &:hover,
+    &:focus {
+      background-color: rgba(255, 255, 255, 0.8);
     }
   }
 }
+
 
 // Media Queries
 @mixin responsive($breakpoint) {
@@ -369,6 +492,20 @@ $hamburger-bar-color: #1c362b;
       &--border-left {
         border-left: unset;
       }
+    }
+  }
+  .hero {
+    &__slide-content {
+      left: 5%;
+      max-width: 90%;
+    }
+
+    &__title {
+      font-size: 2.5rem;
+    }
+
+    &__subtitle {
+      font-size: 1.25rem;
     }
   }
 }
