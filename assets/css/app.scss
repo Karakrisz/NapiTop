@@ -662,7 +662,7 @@ $box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   &__button {
     display: inline-block;
     border-radius: 5px;
-    background: #CCA132;
+    background: #cca132;
     color: #fff;
     padding: 1em 1.5em;
     font-weight: 400;
@@ -732,8 +732,8 @@ $transition-speed: 0.4s;
   position: relative;
   overflow: hidden;
   border-radius: 12px;
-  border: 1px solid #E3E3E3;
-  background: #FFF;
+  border: 1px solid #e3e3e3;
+  background: #fff;
   margin: 0 auto;
   max-width: 1200px;
   margin-bottom: 4em;
@@ -759,8 +759,8 @@ $transition-speed: 0.4s;
 
   &__title {
     font-size: 2.5rem;
-    color: #CCA132;
-    margin-bottom: .3em;
+    color: #cca132;
+    margin-bottom: 0.3em;
     text-transform: uppercase;
     font-weight: 600;
     opacity: 0;
@@ -907,16 +907,16 @@ $box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 
 // Contact section
 .contact {
-  padding: 3em 5em 3em 5em;
-  background-color: #F8F8F8;
+  padding: 3em 5em 2em 5em;
+  background-color: #f8f8f8;
   max-width: 1350px;
   margin: 0 auto;
-
+  margin-bottom: 7em;
 
   &__title {
     font-size: 2rem;
     font-weight: 600;
-    margin-bottom: .5em;
+    margin-bottom: 0.5em;
     color: #181818;
   }
 
@@ -939,7 +939,6 @@ $box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   &__form-row {
     display: flex;
     gap: 1.5rem;
-    margin-bottom: 1.5rem;
 
     @media (max-width: 768px) {
       flex-direction: column;
@@ -956,10 +955,11 @@ $box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   &__textarea {
     width: 100%;
     padding: 0.75rem 1rem;
-    border: 1px solid $border-color;
-    border-radius: $border-radius;
     font-size: 1rem;
     transition: border-color $transition-speed;
+    border-radius: 10px;
+    border: 1px solid var(--Light-Grey, #e3e3e3);
+    background: #fff;
 
     &:focus {
       outline: none;
@@ -991,11 +991,11 @@ $box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 
   &__privacy {
     font-size: 0.9rem;
-    color: #777;
+    color: #c8c8c8;
   }
 
   &__privacy-link {
-    color: $secondary-color;
+    color: #c8c8c8;
     text-decoration: none;
     transition: color $transition-speed;
 
@@ -1090,17 +1090,25 @@ $footer-padding: 4rem 1rem 2rem;
   background-color: $dark-bg;
   color: $text-color;
 
+  .map-box {
+    width: 30%;
+  }
+
+  .footer__map-section {
+    height: 100%;
+  }
+
   &__container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1rem;
+    padding-left: 5em;
+    display: flex;
   }
 
   &__content {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
-    padding: $footer-padding;
+    align-items: center;
+    width: 70%;
 
     @media (max-width: 992px) {
       grid-template-columns: repeat(2, 1fr);
@@ -1112,19 +1120,11 @@ $footer-padding: 4rem 1rem 2rem;
   }
 
   &__logo-section {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    padding: 3em 0;
   }
 
   &__logo {
-    height: 60px;
-    width: auto;
-    margin-bottom: 1rem;
-
-    @media (max-width: 576px) {
-      height: 50px;
-    }
+    width: 70%;
   }
 
   &__tagline {
@@ -1184,10 +1184,13 @@ $footer-padding: 4rem 1rem 2rem;
   }
 
   &__nav-link {
-    color: $text-color;
+    color: #fff;
     text-decoration: none;
-    transition: color $transition-speed, padding-left $transition-speed;
+    transition: color 0.3s, padding-left 0.3s;
     display: inline-block;
+    text-transform: uppercase;
+    font-weight: 400;
+    font-size: 1rem;
 
     &:hover {
       color: $secondary-color;
@@ -1227,14 +1230,13 @@ $footer-padding: 4rem 1rem 2rem;
   }
 
   &__map {
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    height: 100%;
   }
 
   &__map-iframe {
     display: block;
-    border-radius: 8px;
+    height: 100%;
+    width: 100%;
   }
 
   &__bottom {

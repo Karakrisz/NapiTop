@@ -17,72 +17,19 @@ const currentYear = computed(() => new Date().getFullYear())
               class="footer__logo"
             />
           </NuxtLink>
-          <div class="footer__tagline">Egy hely, ahol az álom valóra válik</div>
-          <div class="footer__social">
-            <a
-              href="https://facebook.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="footer__social-link"
-              aria-label="Facebook"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="footer__social-icon"
-              >
-                <path
-                  d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
-                ></path>
-              </svg>
-            </a>
-            <a
-              href="https://instagram.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="footer__social-link"
-              aria-label="Instagram"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="footer__social-icon"
-              >
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                <path
-                  d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"
-                ></path>
-                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-              </svg>
-            </a>
-          </div>
         </div>
 
         <div class="footer__nav-section">
-          <h3 class="footer__heading">Főoldal</h3>
           <nav class="footer__nav">
             <ul class="footer__nav-list">
               <li class="footer__nav-item">
                 <NuxtLink to="/" class="footer__nav-link">Kezdőlap</NuxtLink>
               </li>
               <li class="footer__nav-item">
-                <NuxtLink to="/" class="footer__nav-link"
-                  >Rólunk</NuxtLink
-                >
+                <NuxtLink to="/" class="footer__nav-link">Galéria</NuxtLink>
+              </li>
+              <li class="footer__nav-item">
+                <NuxtLink to="/" class="footer__nav-link">Rólunk</NuxtLink>
               </li>
               <li class="footer__nav-item">
                 <NuxtLink to="/" class="footer__nav-link"
@@ -90,13 +37,17 @@ const currentYear = computed(() => new Date().getFullYear())
                 >
               </li>
               <li class="footer__nav-item">
-                <NuxtLink to="/" class="footer__nav-link"
-                  >Galéria</NuxtLink
-                >
+                <NuxtLink to="/" class="footer__nav-link">Kapcsolat</NuxtLink>
+              </li>
+              <li class="footer__nav-item">
+                <NuxtLink to="/" class="footer__nav-link">Referenciák</NuxtLink>
+              </li>
+              <li class="footer__nav-item">
+                <NuxtLink to="/" class="footer__nav-link">Partnerek</NuxtLink>
               </li>
               <li class="footer__nav-item">
                 <NuxtLink to="/" class="footer__nav-link"
-                  >Kapcsolat</NuxtLink
+                  >Ajánlatkérés</NuxtLink
                 >
               </li>
             </ul>
@@ -104,7 +55,6 @@ const currentYear = computed(() => new Date().getFullYear())
         </div>
 
         <div class="footer__contact-section">
-          <h3 class="footer__heading">Elérhetőségek</h3>
           <address class="footer__address">
             <div class="footer__contact-item">
               <svg
@@ -169,14 +119,12 @@ const currentYear = computed(() => new Date().getFullYear())
             </div>
           </address>
         </div>
-
+      </div>
+      <div class="map-box">
         <div class="footer__map-section">
-          <h3 class="footer__heading">Térkép</h3>
           <div class="footer__map">
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d22019.964666946836!2d20.458383907654575!3d46.21442981772996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4744665088f7531f%3A0xf5a1e2d46fedcb58!2zTWFrw7M!5e0!3m2!1shu!2shu!4v1684424926254!5m2!1shu!2shu"
-              width="100%"
-              height="200"
               style="border: 0"
               allowfullscreen=""
               loading="lazy"
@@ -186,23 +134,6 @@ const currentYear = computed(() => new Date().getFullYear())
             >
             </iframe>
           </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="footer__bottom">
-      <div class="footer__container">
-        <div class="footer__copyright">
-          © {{ currentYear }} Parti Birtok Rendezvényház. Minden jog fenntartva.
-        </div>
-        <div class="footer__legal">
-          <NuxtLink to="/" class="footer__legal-link"
-            >Adatvédelmi Nyilatkozat</NuxtLink
-          >
-          <span class="footer__separator">|</span>
-          <NuxtLink to="/" class="footer__legal-link">ÁSZF</NuxtLink>
-          <span class="footer__separator">|</span>
-          <NuxtLink to="/" class="footer__legal-link">Cookie-k</NuxtLink>
         </div>
       </div>
     </div>

@@ -112,7 +112,7 @@ const handleSubmit = async () => {
             id="message"
             v-model="formData.message"
             class="contact__textarea"
-            placeholder="Üzenet"
+            placeholder="Üzenet..."
             rows="6"
           ></textarea>
         </div>
