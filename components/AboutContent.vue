@@ -2,7 +2,7 @@
 import { ref, onMounted } from 'vue'
 
 // A kép importálása a public mappából
-const aboutImage = ref('/img/about-us.jpg')
+const aboutImage = ref('/img/about.webp')
 
 // Kliens oldali renderelés ellenőrzése
 const isClient = ref(false)

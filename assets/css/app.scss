@@ -405,9 +405,10 @@ $box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   }
 
   &__title {
-    font-size: 2.5rem;
-    margin-bottom: .3em;
+    font-size: 2rem;
+    margin-bottom: 0.7em;
     color: #181818;
+    font-weight: 600;
   }
 
   &__subtitle {
@@ -465,7 +466,7 @@ $box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     font-style: normal;
     font-weight: 600;
     line-height: normal;
-    margin-bottom: .5em;
+    margin-bottom: 0.5em;
   }
 
   &__card-text {
@@ -538,7 +539,7 @@ $box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 
 // Variables
 $primary-color: #fff;
-$secondary-color: #f8bb33;
+$secondary-color: #181818;
 $text-color: #333;
 $highlight-color: #cd9a34;
 $bg-color: #fff;
@@ -557,16 +558,17 @@ $box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   }
 
   &__title {
-    font-size: 2.5rem;
-    margin-bottom: 3rem;
-    color: $text-color;
+    font-size: 2rem;
+    margin-bottom: 1em;
+    color: #242424;
     text-align: left;
+    font-weight: 600;
   }
 
   &__content {
     display: flex;
     gap: 3rem;
-    align-items: flex-start;
+    align-items: center;
 
     @media (max-width: 992px) {
       flex-direction: column;
@@ -606,7 +608,7 @@ $box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 
   &__image {
     width: 100%;
-    height: 100%;
+    height: 90vh;
     object-fit: cover;
     display: block;
     transition: transform $transition-speed;
@@ -630,21 +632,20 @@ $box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   }
 
   &__intro {
-    font-size: 1.2rem;
     line-height: 1.6;
-    margin-bottom: 1.5rem;
-    color: $text-color;
+    margin-bottom: 1em;
+    color: #242424;
   }
 
   &__paragraph {
     margin-bottom: 1.5rem;
     line-height: 1.6;
-    color: $text-color;
+    color: #242424;
   }
 
   &__highlight {
     font-weight: 700;
-    color: $highlight-color;
+    color: #242424;
   }
 
   &__cta-text {
@@ -660,10 +661,11 @@ $box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 
   &__button {
     display: inline-block;
-    background-color: $secondary-color;
-    color: $text-color;
-    padding: 0.8rem 2rem;
-    font-weight: 600;
+    border-radius: 5px;
+    background: #CCA132;
+    color: #fff;
+    padding: 1em 1.5em;
+    font-weight: 400;
     text-decoration: none;
     border-radius: $border-radius;
     transition: background-color $transition-speed, transform $transition-speed;
@@ -729,10 +731,12 @@ $transition-speed: 0.4s;
   background-color: $background-color;
   position: relative;
   overflow: hidden;
-  border-radius: $border-radius;
-  box-shadow: $box-shadow;
+  border-radius: 12px;
+  border: 1px solid #E3E3E3;
+  background: #FFF;
   margin: 0 auto;
-  max-width: 1400px;
+  max-width: 1200px;
+  margin-bottom: 4em;
 
   &::before {
     content: '';
@@ -748,17 +752,17 @@ $transition-speed: 0.4s;
   &__container {
     position: relative;
     z-index: 2;
-    max-width: 1200px;
-    margin: 0 auto;
-    text-align: center;
+    // max-width: 1200px;
+    // margin: 0 auto;
+    padding: 0 5em;
   }
 
   &__title {
-    font-size: 2.8rem;
-    color: $primary-color;
-    margin-bottom: 2rem;
+    font-size: 2.5rem;
+    color: #CCA132;
+    margin-bottom: .3em;
     text-transform: uppercase;
-    font-weight: 700;
+    font-weight: 600;
     opacity: 0;
     transform: translateY(-20px);
     transition: opacity 0.8s ease, transform 0.8s ease;
@@ -778,8 +782,6 @@ $transition-speed: 0.4s;
   }
 
   &__description {
-    max-width: 800px;
-    margin: 0 auto 3rem;
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 0.8s ease, transform 0.8s ease;
@@ -811,7 +813,7 @@ $transition-speed: 0.4s;
     justify-content: center;
     flex-wrap: wrap;
     gap: 2.5rem;
-    margin-top: 3rem;
+    margin-top: 3.5em;
 
     @media (max-width: 768px) {
       gap: 1.5rem;
@@ -878,7 +880,7 @@ $transition-speed: 0.4s;
   &__event-title {
     font-size: 1.2rem;
     font-weight: 600;
-    color: $text-color;
+    color: #242424;
     text-align: center;
     margin-top: 0.5rem;
 
@@ -905,25 +907,23 @@ $box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 
 // Contact section
 .contact {
-  padding: 5rem 1rem;
-  background-color: #f9f9f9;
+  padding: 3em 5em 3em 5em;
+  background-color: #F8F8F8;
+  max-width: 1350px;
+  margin: 0 auto;
 
-  &__container {
-    max-width: 1000px;
-    margin: 0 auto;
-  }
 
   &__title {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    color: $text-color;
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: .5em;
+    color: #181818;
   }
 
   &__subtitle {
-    font-size: 1.2rem;
-    margin-bottom: 1.5rem;
-    color: $text-color;
+    margin-bottom: 1em;
+    color: #181818;
+    font-weight: 600;
   }
 
   &__text {
@@ -934,13 +934,6 @@ $box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
       color: $text-color;
       line-height: 1.6;
     }
-  }
-
-  &__form {
-    background-color: $primary-color;
-    padding: 2.5rem;
-    border-radius: 8px;
-    box-shadow: $box-shadow;
   }
 
   &__form-row {

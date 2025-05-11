@@ -5,19 +5,19 @@ import { ref, onMounted } from 'vue'
 const events = [
   {
     title: 'Esküvő / lagzi',
-    icon: '/img/icons/wedding.svg',
+    icon: '/img/dream/eskuvo.svg',
   },
   {
     title: 'Családi esemény',
-    icon: '/img/icons/family.svg',
+    icon: '/img/dream/csaladi.svg',
   },
   {
     title: 'Céges buli',
-    icon: '/img/icons/corporate.svg',
+    icon: '/img/dream/ceges.svg',
   },
   {
     title: 'Baráti összejövetel',
-    icon: '/img/icons/friends.svg',
+    icon: '/img/dream/barati.svg',
   },
 ]
 
