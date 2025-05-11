@@ -34,12 +34,24 @@ $text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 @mixin responsive($breakpoint) {
-  @if $breakpoint == tablet {
+  @if $breakpoint == mobile {
+    @media screen and (max-width: 767px) {
+      @content;
+    }
+  } @else if $breakpoint == tablet {
     @media (min-width: 768px) and (max-width: 991px) {
       @content;
     }
-  } @else if $breakpoint == mobile {
-    @media screen and (max-width: 767px) {
+  } @else if $breakpoint == small-desktop {
+    @media (min-width: 992px) and (max-width: 1199px) {
+      @content;
+    }
+  } @else if $breakpoint == medium-desktop {
+    @media (min-width: 1200px) and (max-width: 1299px) {
+      @content;
+    }
+  } @else if $breakpoint == large-desktop {
+    @media (min-width: 1400px) and (max-width: 1499px) {
       @content;
     }
   }
@@ -266,7 +278,7 @@ ul {
 // Fejléc stílusok
 // ------------------------------
 .header-content {
-  padding: 1em 5em;
+  padding: 1em 2.5em 0 5em;
   @include flex-center;
 
   &__logo-box {
@@ -282,7 +294,7 @@ ul {
   &__nav-box {
     width: 80%;
     @include flex-center;
-    justify-content: space-around;
+    justify-content: space-between;
   }
 }
 
@@ -292,11 +304,13 @@ ul {
     margin: 0;
     justify-content: end;
     @include flex-center;
-    margin-top: -4em;
+    margin-top: -4.5em;
+    flex-wrap: wrap;
   }
 
   &__item {
     padding: 0 1em;
+    font-size: 1rem;
   }
 
   &__list__li {
@@ -1316,6 +1330,23 @@ ul {
     color: $border-color;
   }
 }
+
+// ------------------------------
+// Gép  stílusok
+// ------------------------------
+
+@include responsive(medium-desktop) {
+  .menu__item {
+    font-size: 0.9rem;
+  }
+}
+
+@include responsive(small-desktop) {
+  .menu__item {
+    font-size: 0.8rem;
+  }
+}
+
 // ------------------------------
 // Mobil menü stílusok
 // ------------------------------
@@ -1346,40 +1377,6 @@ $hamburger-bar-color: #1c362b;
     }
   }
 
-  .hamburger {
-    background-color: $hamburger-bg-color;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    width: 4.3em;
-    height: 3.7em;
-    border: none;
-    cursor: pointer;
-    padding: 0.7em;
-
-    &.open {
-      .bar {
-        &:nth-child(1) {
-          transform: rotate(45deg) translate(5px, 5px);
-        }
-
-        &:nth-child(2) {
-          opacity: 0;
-        }
-
-        &:nth-child(3) {
-          transform: rotate(-45deg) translate(5px, -5px);
-        }
-      }
-    }
-
-    .bar {
-      height: 0.23em;
-      width: 100%;
-      background-color: $hamburger-bar-color;
-      transition: all 0.3s ease;
-    }
-  }
 
   .menu {
     background-color: $menu-bg-color;
@@ -1390,6 +1387,7 @@ $hamburger-bar-color: #1c362b;
     height: 100%;
     transition: right 0.7s ease;
     z-index: 1000;
+    display: none;
 
     &--open {
       right: 0;
@@ -1415,19 +1413,23 @@ $hamburger-bar-color: #1c362b;
       }
     }
   }
-
   .hero {
+    margin-top: 0;
     &__slide-content {
       left: 5%;
       max-width: 90%;
     }
 
     &__title {
-      font-size: 2.5rem;
+      font-size: 2rem;
     }
 
     &__subtitle {
       font-size: 1.25rem;
     }
+  }
+
+  .footer__container {
+    flex-direction: column;
   }
 }
