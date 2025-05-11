@@ -11,7 +11,7 @@ const currentYear = computed(() => new Date().getFullYear())
       <div class="footer__content">
         <div class="footer__logo-section">
           <NuxtLink to="/" class="footer__logo-link">
-            <img
+            <NuxtImg
               src="/img/logo.svg"
               alt="Parti Birtok Rendezvényház Logo"
               class="footer__logo"
@@ -45,7 +45,7 @@ const currentYear = computed(() => new Date().getFullYear())
               <li class="footer__nav-item">
                 <NuxtLink to="/" class="footer__nav-link">Partnerek</NuxtLink>
               </li>
-              <li class="footer__nav-item">
+              <li class="footer__nav-item footer__nav-item--margin-0">
                 <NuxtLink to="/" class="footer__nav-link"
                   >Ajánlatkérés</NuxtLink
                 >
@@ -72,28 +72,7 @@ const currentYear = computed(() => new Date().getFullYear())
                 <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
                 <circle cx="12" cy="10" r="3"></circle>
               </svg>
-              <span>6900 Makó, Rákosi út 123.</span>
-            </div>
-            <div class="footer__contact-item">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="18"
-                height="18"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="footer__contact-icon"
-              >
-                <path
-                  d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
-                ></path>
-              </svg>
-              <a href="tel:+36301234567" class="footer__contact-link"
-                >+36 30 123 4567</a
-              >
+              <span>Ugar tanya 100</span>
             </div>
             <div class="footer__contact-item">
               <svg
@@ -117,6 +96,34 @@ const currentYear = computed(() => new Date().getFullYear())
                 >info@partibirtok.hu</a
               >
             </div>
+            <div class="footer__contact-item">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="footer__contact-icon"
+              >
+                <path
+                  d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+                ></path>
+              </svg>
+              <a href="tel:+36309279233" class="footer__contact-link"
+                >+36 30 927 9233</a
+              >
+            </div>
+            <div class="digitalseed">
+              <NuxtImg
+                src="/img/digitalseed.svg"
+                alt="Parti Birtok Rendezvényház Logo"
+                class="digitalseed__logo"
+              />
+            </div>
           </address>
         </div>
       </div>
@@ -124,7 +131,7 @@ const currentYear = computed(() => new Date().getFullYear())
         <div class="footer__map-section">
           <div class="footer__map">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d22019.964666946836!2d20.458383907654575!3d46.21442981772996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4744665088f7531f%3A0xf5a1e2d46fedcb58!2zTWFrw7M!5e0!3m2!1shu!2shu!4v1684424926254!5m2!1shu!2shu"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2758.1020561634004!2d20.538916676359236!3d46.268076071098534!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4744596dc48907e5%3A0x66336c39e4ab2885!2sMak%C3%B3%2C%20Ugar%20tanya%20100%2C%206900!5e0!3m2!1shu!2shu!4v1746977151456!5m2!1shu!2shu"
               style="border: 0"
               allowfullscreen=""
               loading="lazy"
