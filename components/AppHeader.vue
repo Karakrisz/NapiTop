@@ -11,24 +11,27 @@ const links = [
 ]
 
 const isMenuOpen = ref(false)
-const router = useRouter()
-const menuRef = ref(null)
+const isMobile = ref(false)
 
-// Menü bezárása navigáció után
-watch(() => router.currentRoute.value.path, () => {
-  isMenuOpen.value = false
-})
+// Mobilnézet ellenőrzése
+const checkScreenSize = () => {
+  isMobile.value = window.innerWidth < 1200
+}
 
-// Menü bezárása ESC gombra és kívülre kattintáskor
 onMounted(() => {
+  checkScreenSize()
+  window.addEventListener('resize', checkScreenSize)
   document.addEventListener('keydown', handleKeydown)
   document.addEventListener('click', handleClickOutside)
 })
 
-onUnmounted(() => {
+onBeforeUnmount(() => {
+  window.removeEventListener('resize', checkScreenSize)
   document.removeEventListener('keydown', handleKeydown)
   document.removeEventListener('click', handleClickOutside)
 })
+
+const menuRef = ref(null)
 
 function handleKeydown(e) {
   if (e.key === 'Escape' && isMenuOpen.value) {
@@ -37,10 +40,27 @@ function handleKeydown(e) {
 }
 
 function handleClickOutside(e) {
-  if (isMenuOpen.value && menuRef.value && !menuRef.value.contains(e.target) && !e.target.closest('.hamburger')) {
+  if (isMobile.value && isMenuOpen.value && menuRef.value && !menuRef.value.contains(e.target) && !e.target.closest('.hamburger')) {
     isMenuOpen.value = false
   }
 }
+
+// Menü bezárása navigáció után
+const router = useRouter()
+watch(() => router.currentRoute.value.path, () => {
+  if (isMenuOpen.value) {
+    isMenuOpen.value = false
+  }
+})
+
+// Ha nyitva van a menü, akkor akadályozza meg a görgetést
+watch(isMenuOpen, (newVal) => {
+  if (isMobile.value && newVal) {
+    document.body.style.overflow = 'hidden'
+  } else {
+    document.body.style.overflow = ''
+  }
+})
 </script>
 
 <template>
@@ -57,8 +77,9 @@ function handleClickOutside(e) {
         </a>
       </div>
       <div class="nav-box header-content__nav-box d-flex">
-        <!-- Hamburger gomb -->
+        <!-- Hamburger gomb - csak mobilon jelenik meg -->
         <button
+          v-if="isMobile"
           @click="isMenuOpen = !isMenuOpen"
           class="hamburger"
           :class="{ open: isMenuOpen }"
@@ -69,14 +90,14 @@ function handleClickOutside(e) {
           <div class="bar"></div>
         </button>
         
-        <!-- Mobil menü overlay -->
+        <!-- Overlay a menü mögé - csak mobilon -->
         <Transition name="fade">
-          <div v-if="isMenuOpen" class="menu-overlay"></div>
+          <div v-if="isMobile && isMenuOpen" class="menu-overlay" @click="isMenuOpen = false"></div>
         </Transition>
         
-        <!-- Mobil menü (csak 1200px alatt jelenik meg) -->
+        <!-- Mobil menü - csak mobilon -->
         <Transition name="slide">
-          <nav v-if="isMenuOpen" ref="menuRef" class="mobile-menu">
+          <nav v-if="isMobile && isMenuOpen" ref="menuRef" class="mobile-menu">
             <div class="mobile-menu-header">
               <span class="mobile-menu-title">Menü</span>
               <button @click="isMenuOpen = false" class="close-button">
@@ -88,7 +109,7 @@ function handleClickOutside(e) {
             </div>
             
             <ul class="mobile-menu-list">
-              <li v-for="link in links" :key="link.path" class="mobile-menu-item">
+              <li v-for="(link, index) in links" :key="link.path" class="mobile-menu-item" :style="`animation-delay: ${index * 0.05}s`">
                 <NuxtLink
                   :to="link.path"
                   class="mobile-menu-link"
@@ -163,8 +184,8 @@ function handleClickOutside(e) {
           </nav>
         </Transition>
         
-        <!-- Itt van az eredeti desktop menüd, amit már megcsináltál -->
-        <nav :class="{ 'menu--open': isMenuOpen, menu: true }" id="menu">
+        <!-- Eredeti desktop menü -->
+        <nav :class="{ menu: true }" id="menu">
           <ul id="menu__list" class="menu__list d-flex">
             <li v-for="link in links" :key="link.path" class="menu__list__li">
               <NuxtLink
@@ -192,7 +213,12 @@ function handleClickOutside(e) {
 </template>
 
 <style scoped>
-/* Csak a mobil menü részek stílusai */
+/* Alap stílusok */
+.header {
+  position: relative;
+  width: 100%;
+  z-index: 1000;
+}
 
 /* Hamburger gomb - csak 1200px alatt jelenik meg */
 .hamburger {
@@ -236,6 +262,7 @@ function handleClickOutside(e) {
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 999;
+  backdrop-filter: blur(3px);
 }
 
 /* Mobil menü */
@@ -283,6 +310,9 @@ function handleClickOutside(e) {
 
 .mobile-menu-item {
   border-bottom: 1px solid #f0f0f0;
+  animation: slideIn 0.3s forwards;
+  opacity: 0;
+  transform: translateX(20px);
 }
 
 .mobile-menu-link {
@@ -291,11 +321,13 @@ function handleClickOutside(e) {
   padding: 1rem 1.5rem;
   color: #333;
   text-decoration: none;
-  transition: background-color 0.3s;
+  transition: all 0.3s ease;
 }
 
-.mobile-menu-link:active {
+.mobile-menu-link:active,
+.mobile-menu-link:hover {
   background-color: #f8f8f8;
+  transform: translateX(5px);
 }
 
 .mobile-menu-icon {
@@ -336,10 +368,22 @@ function handleClickOutside(e) {
   transform: translateX(100%);
 }
 
-/* Csak 1200px alatt jelenjen meg a hamburger és a mobil menü*/
-@media (max-width: 1200px) {
+@keyframes slideIn {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* 1200px alatti nézet */
+@media (max-width: 1199px) {
   .hamburger {
     display: block;
+  }
+  
+  /* Az eredeti desktop menüd elrejtése mobilon */
+  #menu.menu {
+    display: none;
   }
 }
 </style>
