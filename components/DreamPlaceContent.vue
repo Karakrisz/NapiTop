@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted } from 'vue'
 
 // Események adatai
 const events = [
@@ -21,75 +21,47 @@ const events = [
   },
 ]
 
-// Animáció állapotok
-const titleVisible = ref(false)
-const descriptionVisible = ref(false)
-const eventItemsVisible = ref(false)
+// Kliens oldali renderelés ellenőrzése
+const isClient = ref(false)
+const inView = ref(false)
 
-// Ref a szekcióhoz
-const dreamSection = ref(null)
-
-// IntersectionObserver
-let observer = null
-
+// Komponens betöltése után
 onMounted(() => {
-  // Observer létrehozása
-  observer = new IntersectionObserver(
-    (entries) => {
-      const entry = entries[0]
-
-      if (entry.isIntersecting) {
-        // Animációk indítása sorban
-        setTimeout(() => {
-          titleVisible.value = true
-
-          setTimeout(() => {
-            descriptionVisible.value = true
-
-            setTimeout(() => {
-              eventItemsVisible.value = true
-            }, 200)
-          }, 200)
-        }, 100)
-
-        // Megfigyelés leállítása
-        observer.unobserve(entry.target)
-      }
-    },
-    {
-      threshold: 0.2,
-      rootMargin: '0px 0px -50px 0px',
+  // Beállítjuk, hogy kliens oldalon vagyunk
+  isClient.value = true
+  
+  // IntersectionObserver használata a szekcióhoz
+  const observer = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) {
+      inView.value = true
+      observer.disconnect()
     }
-  )
-
-  // Kezdjük a megfigyelést
-  if (dreamSection.value) {
-    observer.observe(dreamSection.value)
-  }
-})
-
-onUnmounted(() => {
-  // Takarítás
-  if (observer) {
-    observer.disconnect()
-    observer = null
+  }, {
+    threshold: 0.2,
+    rootMargin: '0px 0px -50px 0px'
+  })
+  
+  // A teljes szekció megfigyelése
+  const section = document.getElementById('dream-place')
+  if (section) {
+    observer.observe(section)
   }
 })
 </script>
 
 <template>
-  <section class="dream" id="dream-place" ref="dreamSection">
+  <section class="dream" id="dream-place">
     <div class="dream__container">
       <h2
         class="dream__title"
-        :class="{ 'dream__title--visible': titleVisible }"
+        :class="{ 'is-animated': isClient, 'in-view': isClient && inView }"
       >
         EGY HELY, AHOL AZ ÁLOM VALÓRA VÁLIK
       </h2>
 
       <div
         class="dream__description"
-        :class="{ 'dream__description--visible': descriptionVisible }"
+        :class="{ 'is-animated': isClient, 'in-view': isClient && inView }"
       >
         <p class="dream__text">
           A Parti-birtok tökéletes helyszín esküvők, családi események, céges
@@ -107,8 +79,8 @@ onUnmounted(() => {
           v-for="(event, index) in events"
           :key="event.title"
           class="dream__event-item"
-          :class="{ 'dream__event-item--visible': eventItemsVisible }"
-          :style="{ transitionDelay: `${index * 100 + 300}ms` }"
+          :class="{ 'is-animated': isClient, 'in-view': isClient && inView }"
+          :style="isClient && inView ? { transitionDelay: `${index * 100 + 300}ms` } : {}"
         >
           <div class="dream__event-icon-wrapper">
             <img
@@ -123,3 +95,58 @@ onUnmounted(() => {
     </div>
   </section>
 </template>
+
+<style lang="scss" scoped>
+.dream {
+  /* Alapállapot minden elemhez */
+  &__title,
+  &__description,
+  &__event-item {
+    opacity: 1; /* Alapértelmezetten látható a keresőmotorok számára */
+    transform: translateY(0);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  }
+  
+  /* Címsor animáció kliens oldalon */
+  &__title.is-animated {
+    &:not(.in-view) {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    
+    &.in-view {
+      opacity: 1;
+      transform: translateY(0);
+      transition-delay: 100ms;
+    }
+  }
+  
+  /* Leírás animáció kliens oldalon */
+  &__description.is-animated {
+    &:not(.in-view) {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    
+    &.in-view {
+      opacity: 1;
+      transform: translateY(0);
+      transition-delay: 300ms;
+    }
+  }
+  
+  /* Esemény elemek animáció kliens oldalon */
+  &__event-item.is-animated {
+    &:not(.in-view) {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    
+    &.in-view {
+      opacity: 1;
+      transform: translateY(0);
+      /* Az egyedi késleltetést a v-for ciklusban állítjuk be inline style-lal */
+    }
+  }
+}
+</style>

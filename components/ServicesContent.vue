@@ -1,116 +1,98 @@
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted } from 'vue'
 
+// Szolgáltatások adatmodellje
 const services = [
   {
     title: 'Professzionális<br>Hang- és fénytechnika',
     description:
       'A buli korlátlan ideig tarthat, nem kell a hangerő miatt aggódnod!',
-    iconUrl: '/img/icons/sound-light.svg',
+    iconUrl: '/img/services/hang.svg',
   },
   {
     title: 'Sütés-főzés',
     description:
       'Szeretnétek közösen grillezni, bográcsozni főzni? Mi biztosítjuk a lehetőséget.',
-    iconUrl: '/img/icons/grill.svg',
+    iconUrl: '/img/services/sutes.svg',
   },
   {
     title: 'Catering',
     description:
       'Teljes körű étel-ital kiszolgálás és helyszíndekoráció, ha nem szeretnél semmivel bajlódni.',
-    iconUrl: '/img/icons/catering.svg',
+    iconUrl: '/img/services/kerting.svg',
   },
   {
     title: 'Kifogyhatatlan bárpult',
     description: 'A hangulat nálunk nem csak garantált, hanem felejthetetlen!',
-    iconUrl: '/img/icons/bar.svg',
+    iconUrl: '/img/services/barpult.svg',
   },
   {
     title: 'Lazulós pillanatok',
     description: 'Vízipipa sarok a kikapcsolódáshoz.',
-    iconUrl: '/img/icons/hookah.svg',
+    iconUrl: '/img/services/lazul.svg',
   },
   {
     title: 'Játszótér',
     description:
       'A kicsik sem fognak unatkozni - biztonságos, vidám játszótér várja őket.',
-    iconUrl: '/img/icons/playground.svg',
+    iconUrl: '/img/services/jatszoter.svg',
   },
   {
     title: 'Szállás',
     description: 'Egyelőre 4 fő részére biztosítunk kényelmes pihenőhelyet.',
-    iconUrl: '/img/icons/accommodation.svg',
+    iconUrl: '/img/services/szallas.svg',
   },
   {
     title: 'Személyszállítás',
     description:
       'Rugalmas transzfer szolgáltatás, hogy mindenki biztonságban hazaérjen.',
-    iconUrl: '/img/icons/transfer.svg',
+    iconUrl: '/img/services/szemelyszallitas.svg',
   },
   {
     title: 'Szervezési támogatás',
     description:
       'Igény esetén segítünk a rendezvény vizuális világának kialakításában. Fotó, videó, zene, dekoráció, bízd csak ránk!',
-    iconUrl: '/img/icons/event-support.svg',
+    iconUrl: '/img/services/szervezes.svg',
   },
 ]
 
+// Kliens oldali renderelés ellenőrzése
+const isClient = ref(false)
+const inView = ref(false)
 
-const serviceCards = ref([])
-
-
-const visibleItems = ref(Array(services.length).fill(false))
-
-
-let observer = null
-
-
+// Komponens betöltése után
 onMounted(() => {
+  // Csak kliens oldalon futtatjuk
+  isClient.value = true
 
-  observer = new IntersectionObserver(
+  // IntersectionObserver használata a szekcióhoz
+  const observer = new IntersectionObserver(
     (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-  
-          const index = serviceCards.value.findIndex(
-            (card) => card === entry.target
-          )
-          if (index !== -1) {
-   
-            setTimeout(() => {
-              visibleItems.value[index] = true
-            }, 100)
-
-          
-            observer.unobserve(entry.target)
-          }
-        }
-      })
+      if (entries[0].isIntersecting) {
+        inView.value = true
+        observer.disconnect()
+      }
     },
     {
-      threshold: 0.1, 
-      rootMargin: '0px 0px -50px 0px', 
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px',
     }
   )
 
+  // A teljes szekció megfigyelése
+  const section = document.getElementById('services')
+  if (section) {
+    observer.observe(section)
+  }
 
-  setTimeout(() => {
-    if (serviceCards.value.length) {
-      serviceCards.value.forEach((card) => {
-        observer.observe(card)
-      })
+  return () => {
+    if (observer) {
+      observer.disconnect()
     }
-  }, 100)
-})
-
-
-onUnmounted(() => {
-  if (observer) {
-    observer.disconnect()
-    observer = null
   }
 })
 </script>
+
 <template>
   <section class="services" id="services">
     <div class="services__container">
@@ -125,19 +107,22 @@ onUnmounted(() => {
           v-for="(service, index) in services"
           :key="index"
           class="services__card"
-          ref="serviceCards"
-          :style="{
-            animationDelay: `${index * 100}ms`,
-            animationName: visibleItems[index] ? 'fadeInUp' : 'none',
-            animationDuration: '0.6s',
-            animationFillMode: 'both',
-            opacity: visibleItems[index] ? 1 : 0,
-          }"
+          :class="{ 'is-visible': isClient }"
+          :style="
+            isClient
+              ? {
+                  animationDelay: `${index * 100}ms`,
+                  animationName: inView ? 'fadeInUp' : 'none',
+                  animationDuration: '0.6s',
+                  animationFillMode: 'both',
+                }
+              : {}
+          "
         >
           <div class="services__icon-wrapper">
             <img
               :src="service.iconUrl"
-              :alt="`${service.title} ikon`"
+              :alt="`${service.title.replace(/<br>/g, ' ')} ikon`"
               class="services__icon"
             />
           </div>
@@ -156,7 +141,7 @@ onUnmounted(() => {
 </template>
 
 <style lang="scss">
-
+// Animációk
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -165,6 +150,22 @@ onUnmounted(() => {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+.services {
+  &__card {
+    // Alapértelmezetten látható a keresőmotorok számára
+    opacity: 1;
+
+    // Kliens oldalon kezelve az animációt
+    &.is-visible {
+      opacity: 0;
+
+      &.inView {
+        opacity: 1;
+      }
+    }
   }
 }
 </style>

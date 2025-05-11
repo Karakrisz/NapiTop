@@ -385,6 +385,7 @@ $transition-speed: 0.4s;
 }
 
 
+
 // Variables
 $primary-color: #fff;
 $secondary-color: #f8bb33;
@@ -467,7 +468,7 @@ $box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     width: 60px;
     height: 60px;
     object-fit: contain;
-    filter: brightness(0) invert(1); 
+    filter: brightness(0) invert(1); // Ikon fehérré alakítása
   }
   
   &__content {
@@ -522,7 +523,7 @@ $box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   }
 }
 
-
+// Reszponzív beállítások
 @media (max-width: 768px) {
   .services {
     padding: 4rem 1rem;

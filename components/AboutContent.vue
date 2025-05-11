@@ -1,80 +1,47 @@
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted } from 'vue'
 
-// A kép importálása
-// Nuxt-ban a következő módok valamelyikét használjuk
-// 1. Az assets mappából (ha az assets mappában van a kép)
-// const aboutImage = ref('/assets/img/about/about-us.jpg');
-
-// 2. A public mappából (ha a public mappában van a kép)
+// A kép importálása a public mappából
 const aboutImage = ref('/img/about-us.jpg')
 
-// Ref a szekcióhoz
-const aboutSection = ref(null)
+// Kliens oldali renderelés ellenőrzése
+const isClient = ref(false)
+const inView = ref(false)
 
-// Animáció állapotok
-const imageVisible = ref(false)
-const textVisible = ref(false)
-
-// Observer
-let observer = null
-
+// Komponens betöltése után
 onMounted(() => {
-  // Létrehozzuk az IntersectionObserver-t
-  observer = new IntersectionObserver(
-    (entries) => {
-      const entry = entries[0]
-
-      if (entry.isIntersecting) {
-        // Animációk elindítása késleltetéssel
-        setTimeout(() => {
-          imageVisible.value = true
-
-          // Szöveg megjelenítése kis késleltetéssel
-          setTimeout(() => {
-            textVisible.value = true
-          }, 300)
-        }, 100)
-
-        // Leállítjuk a megfigyelést
-        observer.unobserve(entry.target)
-      }
-    },
-    {
-      threshold: 0.2,
-      rootMargin: '0px 0px -100px 0px',
+  // Beállítjuk, hogy kliens oldalon vagyunk
+  isClient.value = true
+  
+  // IntersectionObserver használata a szekcióhoz
+  const observer = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) {
+      inView.value = true
+      observer.disconnect()
     }
-  )
-
-  // Elkezdjük a szekció megfigyelését
-  if (aboutSection.value) {
-    observer.observe(aboutSection.value)
-  }
-})
-
-onUnmounted(() => {
-  // Megfigyelés leállítása
-  if (observer) {
-    observer.disconnect()
-    observer = null
+  }, {
+    threshold: 0.2,
+    rootMargin: '0px 0px -100px 0px'
+  })
+  
+  // A teljes szekció megfigyelése
+  const section = document.getElementById('about')
+  if (section) {
+    observer.observe(section)
   }
 })
 </script>
 
 <template>
-  <section class="about" id="about" ref="aboutSection">
+  <section class="about" id="about">
     <div class="about__container">
       <h2 class="about__title">Rólunk</h2>
 
       <div class="about__content">
+        <!-- Kép konténer - SEO-barát megoldás, az animáció csak kliens oldalon jelenik meg -->
         <div
           class="about__image-wrapper"
-          :style="
-            imageVisible
-              ? 'opacity: 1; transform: translateX(0)'
-              : 'opacity: 0; transform: translateX(-50px)'
-          "
-          :class="{ 'about__image-wrapper--animated': imageVisible }"
+          :class="{ 'is-animated': isClient, 'in-view': isClient && inView }"
         >
           <img
             :src="aboutImage"
@@ -83,14 +50,10 @@ onUnmounted(() => {
           />
         </div>
 
+        <!-- Szöveg konténer - SEO-barát megoldás, az animáció csak kliens oldalon jelenik meg -->
         <div
           class="about__text"
-          :style="
-            textVisible
-              ? 'opacity: 1; transform: translateX(0)'
-              : 'opacity: 0; transform: translateX(50px)'
-          "
-          :class="{ 'about__text--animated': textVisible }"
+          :class="{ 'is-animated': isClient, 'in-view': isClient && inView }"
         >
           <p class="about__intro">
             A Parti Birtok Rendezvényház
@@ -144,16 +107,40 @@ onUnmounted(() => {
 </template>
 
 <style lang="scss" scoped>
-// Transitions
 .about {
   &__image-wrapper,
   &__text {
+    /* Alapértelmezett állapot (keresőmotorok számára) */
+    opacity: 1;
+    transform: translateX(0);
     transition: opacity 0.8s ease-out, transform 0.8s ease-out;
   }
-
-  &__image-wrapper--animated,
-  &__text--animated {
-    transition-delay: 0.2s;
+  
+  /* Kliens oldali animációk */
+  &__image-wrapper.is-animated {
+    &:not(.in-view) {
+      opacity: 0;
+      transform: translateX(-50px);
+    }
+    
+    &.in-view {
+      opacity: 1;
+      transform: translateX(0);
+      transition-delay: 0.2s;
+    }
+  }
+  
+  &__text.is-animated {
+    &:not(.in-view) {
+      opacity: 0;
+      transform: translateX(50px);
+    }
+    
+    &.in-view {
+      opacity: 1;
+      transform: translateX(0);
+      transition-delay: 0.5s;
+    }
   }
 }
 </style>
