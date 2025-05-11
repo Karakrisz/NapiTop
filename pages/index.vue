@@ -1,5 +1,6 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue'
+import ContactContent from '~/components/ContactContent.vue'
 
 const slides = ref([
   {
@@ -310,4 +311,7 @@ onUnmounted(() => {
   </section>
 
   <ServicesContent />
+  <AboutContent />
+  <DreamPlaceContent />
+  <ContactContent />
 </template>
