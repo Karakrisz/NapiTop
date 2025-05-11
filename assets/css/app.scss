@@ -1,18 +1,28 @@
 @use 'sass:color';
-// Variables
+
+// ------------------------------
+// Változók
+// ------------------------------
 $primary-color: #fff;
 $secondary-color: #155b9b;
+$tertiary-color: #cca132;
+$dark-color: #181818;
 $text-color: #001647;
+$dark-text: #333;
 $white: #fff;
 $black: #000;
+$error-color: #e74c3c;
+$success-color: #2ecc71;
+$dark-bg: #111;
+$border-color: #ddd;
+$border-radius: 8px;
+$transition-speed: 0.3s;
+$box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+$text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 
-// Typography
-ul li p,
-h2 {
-  font-size: 10px;
-}
-
-// Mixins
+// ------------------------------
+// Mixinek
+// ------------------------------
 @mixin flex-center {
   display: flex;
   align-items: center;
@@ -23,7 +33,21 @@ h2 {
   grid-template-columns: repeat($columns, 1fr);
 }
 
-// Keyframe Animations
+@mixin responsive($breakpoint) {
+  @if $breakpoint == tablet {
+    @media (min-width: 768px) and (max-width: 991px) {
+      @content;
+    }
+  } @else if $breakpoint == mobile {
+    @media screen and (max-width: 767px) {
+      @content;
+    }
+  }
+}
+
+// ------------------------------
+// Animációk
+// ------------------------------
 @keyframes gradient-animation {
   0% {
     background-position: 0% 50%;
@@ -47,7 +71,31 @@ h2 {
   }
 }
 
-// Global Styles
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// ------------------------------
+// Alap stílusok
+// ------------------------------
 body {
   max-width: 2570px;
   margin: auto;
@@ -62,10 +110,12 @@ button {
 
 ::-webkit-scrollbar {
   width: 8px;
+  
   &-track {
     width: 13px;
     background: $white;
   }
+  
   &-thumb {
     background: linear-gradient(
       100deg,
@@ -91,6 +141,10 @@ h5 {
   margin: 0;
 }
 
+h2 {
+  font-size: 10px;
+}
+
 a {
   text-decoration: none;
 }
@@ -108,42 +162,59 @@ button {
 
 ul {
   list-style: none;
+  
+  li p {
+    font-size: 10px;
+  }
 }
 
-// Utility Classes
+// ------------------------------
+// Segédosztályok
+// ------------------------------
 .cursor {
   cursor: pointer;
 }
+
 .d-flex {
   display: flex;
 }
+
 .grid-2 {
   @include grid(2);
 }
+
 .grid-3 {
   @include grid(3);
 }
+
 .grid-7 {
   @include grid(7);
 }
+
 .float-right {
   float: right;
 }
+
 .position-relative {
   position: relative;
 }
+
 .position-absolute {
   position: absolute;
 }
+
 .text-transform-uppercase {
   text-transform: uppercase;
 }
+
 .t-end {
   text-align: end;
 }
+
 .t-left {
   text-align: left;
 }
+
 .text-center {
   text-align: center;
 }
@@ -160,9 +231,11 @@ ul {
 .bg-color-w {
   background-color: $white;
 }
+
 .text-color {
   color: $text-color;
 }
+
 .text-color-w {
   color: $white;
 }
@@ -182,20 +255,23 @@ ul {
   animation: gradient-animation 3s ease infinite;
 }
 
-// Font Weight Classes
+// Font vastagság osztályok
 @for $i from 3 through 7 {
   .f-#{$i}00 {
     font-weight: $i * 100;
   }
 }
 
-// Header Styles
+// ------------------------------
+// Fejléc stílusok
+// ------------------------------
 .header-content {
   padding: 1em 5em;
   @include flex-center;
 
   &__logo-box {
     width: 20%;
+    
     &__link__img {
       width: 70%;
     }
@@ -223,21 +299,16 @@ ul {
     &:first-child {
       border-left: 0.12rem solid $black;
     }
+    
     &__img {
       width: 45%;
     }
   }
 }
 
-// Hero Container Styles
-
-// Variables
-$primary-color: #fff;
-$secondary-color: #f8bb33;
-$text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-$transition-speed: 0.4s;
-
-// Hero Section
+// ------------------------------
+// Hős terület stílusok
+// ------------------------------
 .hero {
   position: relative;
   width: 100%;
@@ -327,16 +398,16 @@ $transition-speed: 0.4s;
   &__button {
     display: inline-block;
     padding: 0.8rem 2rem;
-    background-color: $secondary-color;
+    background-color: $tertiary-color;
     color: #000;
     text-decoration: none;
     font-weight: 600;
     border-radius: 4px;
-    transition: background-color 0.3s, transform 0.3s;
+    transition: background-color $transition-speed, transform $transition-speed;
 
     &:hover,
     &:focus {
-      background-color: color.adjust($secondary-color, $lightness: -10%);
+      background-color: color.adjust($tertiary-color, $lightness: -10%);
       transform: translateY(-2px);
     }
   }
@@ -385,17 +456,9 @@ $transition-speed: 0.4s;
     }
   }
 }
-
-// Variables
-$primary-color: #fff;
-$secondary-color: #f8bb33;
-$card-bg-color: #cd9a34;
-$dark-text: #333;
-$transition-speed: 0.3s;
-$border-radius: 8px;
-$box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-
-// Services Section
+// ------------------------------
+// Szolgáltatások szekció
+// ------------------------------
 .services {
   padding: 5rem 1rem;
   background-color: #f9f9f9;
@@ -408,13 +471,13 @@ $box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   &__title {
     font-size: 2rem;
     margin-bottom: 0.7em;
-    color: #181818;
+    color: $dark-color;
     font-weight: 600;
   }
 
   &__subtitle {
     font-size: 1.1rem;
-    color: #181818;
+    color: $dark-color;
   }
 
   &__grid {
@@ -448,7 +511,7 @@ $box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 
   &__icon {
     border-radius: 10px;
-    background: #cca132;
+    background: $tertiary-color;
     width: 7em;
     height: 7em;
     flex-shrink: 0;
@@ -462,7 +525,7 @@ $box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   }
 
   &__card-title {
-    color: var(--Dark, #181818);
+    color: $dark-color;
     font-size: 1.1rem;
     font-style: normal;
     font-weight: 600;
@@ -473,7 +536,7 @@ $box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   &__card-text {
     font-size: 0.95rem;
     line-height: 1.5;
-    color: #181818;
+    color: $dark-color;
   }
 
   &__action {
@@ -498,23 +561,8 @@ $box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
       transform: translateY(-2px);
     }
   }
-}
-
-// Animációk
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-// Reszponzív beállítások
-@media (max-width: 768px) {
-  .services {
+  
+  @media (max-width: 768px) {
     padding: 4rem 1rem;
 
     &__title {
@@ -538,20 +586,12 @@ $box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   }
 }
 
-// Variables
-$primary-color: #fff;
-$secondary-color: #181818;
-$text-color: #333;
-$highlight-color: #cd9a34;
-$bg-color: #fff;
-$border-radius: 8px;
-$transition-speed: 0.3s;
-$box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-
-// About Section
+// ------------------------------
+// Rólunk szekció
+// ------------------------------
 .about {
   padding: 5rem 1rem;
-  background-color: $bg-color;
+  background-color: $white;
 
   &__container {
     max-width: 1200px;
@@ -653,7 +693,7 @@ $box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     font-size: 1.1rem;
     font-weight: 600;
     margin-bottom: 1.5rem;
-    color: $text-color;
+    color: $dark-text;
   }
 
   &__cta {
@@ -663,7 +703,7 @@ $box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   &__button {
     display: inline-block;
     border-radius: 5px;
-    background: #cca132;
+    background: $tertiary-color;
     color: #fff;
     padding: 1em 1.5em;
     font-weight: 400;
@@ -673,15 +713,12 @@ $box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 
     &:hover,
     &:focus {
-      background-color: color.adjust($secondary-color, $lightness: -10%);
+      background-color: color.adjust($dark-color, $lightness: -10%);
       transform: translateY(-2px);
     }
   }
-}
-
-// Reszponzív beállítások
-@media (max-width: 768px) {
-  .about {
+  
+  @media (max-width: 768px) {
     padding: 4rem 1rem;
 
     &__title {
@@ -698,10 +735,8 @@ $box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
       max-height: 400px;
     }
   }
-}
 
-@media (max-width: 576px) {
-  .about {
+  @media (max-width: 576px) {
     padding: 3rem 1rem;
 
     &__title {
@@ -718,23 +753,16 @@ $box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   }
 }
 
-// Variables
-$primary-color: #cd9a34;
-$text-color: #333;
-$background-color: #fff;
-$border-radius: 12px;
-$box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-$transition-speed: 0.4s;
-
-// Dream Section
+// ------------------------------
+// Álom szekció
+// ------------------------------
 .dream {
   padding: 5rem 1rem;
-  background-color: $background-color;
+  background-color: $white;
   position: relative;
   overflow: hidden;
   border-radius: 12px;
   border: 1px solid #e3e3e3;
-  background: #fff;
   margin: 0 auto;
   max-width: 1200px;
   margin-bottom: 4em;
@@ -753,14 +781,12 @@ $transition-speed: 0.4s;
   &__container {
     position: relative;
     z-index: 2;
-    // max-width: 1200px;
-    // margin: 0 auto;
     padding: 0 5em;
   }
 
   &__title {
     font-size: 2.5rem;
-    color: #cca132;
+    color: $tertiary-color;
     margin-bottom: 0.3em;
     text-transform: uppercase;
     font-weight: 600;
@@ -797,7 +823,7 @@ $transition-speed: 0.4s;
   &__text {
     font-size: 1.1rem;
     line-height: 1.6;
-    color: $text-color;
+    color: $dark-text;
     margin-bottom: 1.5rem;
 
     &:last-child {
@@ -894,36 +920,25 @@ $transition-speed: 0.4s;
     }
   }
 }
-
-// Variables
-$primary-color: #fff;
-$secondary-color: #cd9a34;
-$text-color: #333;
-$border-color: #ddd;
-$error-color: #e74c3c;
-$success-color: #2ecc71;
-$transition-speed: 0.3s;
-$border-radius: 4px;
-$box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-
-// Contact section
+// ------------------------------
+// Kapcsolat szekció
+// ------------------------------
 .contact {
   padding: 3em 5em 2em 5em;
   background-color: #f8f8f8;
   max-width: 1350px;
-  margin: 0 auto;
-  margin-bottom: 7em;
+  margin: 0 auto 7em;
 
   &__title {
     font-size: 2rem;
     font-weight: 600;
     margin-bottom: 0.5em;
-    color: #181818;
+    color: $dark-color;
   }
 
   &__subtitle {
     margin-bottom: 1em;
-    color: #181818;
+    color: $dark-color;
     font-weight: 600;
   }
 
@@ -932,7 +947,7 @@ $box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 
     p {
       margin-bottom: 0.5rem;
-      color: $text-color;
+      color: $dark-text;
       line-height: 1.6;
     }
   }
@@ -959,12 +974,12 @@ $box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     font-size: 1rem;
     transition: border-color $transition-speed;
     border-radius: 10px;
-    border: 1px solid var(--Light-Grey, #e3e3e3);
+    border: 1px solid #e3e3e3;
     background: #fff;
 
     &:focus {
       outline: none;
-      border-color: $secondary-color;
+      border-color: $tertiary-color;
     }
 
     &::placeholder {
@@ -1001,7 +1016,7 @@ $box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     transition: color $transition-speed;
 
     &:hover {
-      color: color.adjust($secondary-color, $lightness: -10%);
+      color: color.adjust($tertiary-color, $lightness: -10%);
       text-decoration: underline;
     }
   }
@@ -1011,7 +1026,7 @@ $box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     align-items: center;
     gap: 0.5rem;
     padding: 0.75rem 1.5rem;
-    background-color: $secondary-color;
+    background-color: $tertiary-color;
     color: $primary-color;
     border: none;
     border-radius: $border-radius;
@@ -1021,7 +1036,7 @@ $box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     transition: background-color $transition-speed, transform $transition-speed;
 
     &:hover:not(:disabled) {
-      background-color: color.adjust($secondary-color, $lightness: -10%);
+      background-color: color.adjust($tertiary-color, $lightness: -10%);
       transform: translateY(-2px);
     }
 
@@ -1064,50 +1079,30 @@ $box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     }
   }
 }
-
-// Animations
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-// Variables
-$primary-color: #fff;
-$secondary-color: #cd9a34;
-$dark-bg: #111;
-$text-color: #ccc;
-$border-color: #333;
-$transition-speed: 0.3s;
-$footer-padding: 4rem 1rem 2rem;
-
-// Footer Styles
+// ------------------------------
+// Lábléc stílusok
+// ------------------------------
 .footer {
   background-color: $dark-bg;
-  color: $text-color;
+  color: #ccc;
 
   .map-box {
     width: 30%;
   }
 
-  .footer__map-section {
+  &__map-section {
     height: 100%;
   }
 
-  .footer__nav-item--margin-0 {
+  &__nav-item--margin-0 {
     margin-bottom: 0;
   }
 
-  .footer__contact-section {
+  &__contact-section {
     padding-left: 3em;
   }
 
-  .footer__nav-section {
+  &__nav-section {
     padding: 3em 0;
   }
 
@@ -1168,7 +1163,7 @@ $footer-padding: 4rem 1rem 2rem;
     transition: background-color $transition-speed, transform $transition-speed;
 
     &:hover {
-      background-color: $secondary-color;
+      background-color: $tertiary-color;
       transform: translateY(-3px);
     }
   }
@@ -1187,7 +1182,7 @@ $footer-padding: 4rem 1rem 2rem;
       left: 0;
       width: 40px;
       height: 2px;
-      background-color: $secondary-color;
+      background-color: $tertiary-color;
     }
   }
 
@@ -1213,7 +1208,7 @@ $footer-padding: 4rem 1rem 2rem;
     font-size: 1rem;
 
     &:hover {
-      color: $secondary-color;
+      color: $tertiary-color;
       padding-left: 5px;
     }
   }
@@ -1237,12 +1232,12 @@ $footer-padding: 4rem 1rem 2rem;
   }
 
   &__contact-link {
-    color: $text-color;
+    color: #ccc;
     text-decoration: none;
     transition: color $transition-speed;
 
     &:hover {
-      color: $secondary-color;
+      color: $tertiary-color;
     }
   }
 
@@ -1287,12 +1282,12 @@ $footer-padding: 4rem 1rem 2rem;
   }
 
   &__legal-link {
-    color: $text-color;
+    color: #ccc;
     text-decoration: none;
     transition: color $transition-speed;
 
     &:hover {
-      color: $secondary-color;
+      color: $tertiary-color;
     }
   }
 
@@ -1301,25 +1296,11 @@ $footer-padding: 4rem 1rem 2rem;
     color: $border-color;
   }
 }
+// ------------------------------
+// Mobil menü stílusok
+// ------------------------------
 
-// Media Queries
-@mixin responsive($breakpoint) {
-  @if $breakpoint == tablet {
-    @media (min-width: 768px) and (max-width: 991px) {
-      @content;
-    }
-  } @else if $breakpoint == mobile {
-    @media screen and (max-width: 767px) {
-      @content;
-    }
-  }
-}
-
-@include responsive(tablet) {
-  // Tablet styles here
-}
-
-// Menu Colors
+// Menü színek
 $menu-bg-color: #1c362b;
 $menu-text-color: #fbfadd;
 $hamburger-bg-color: #fbfadd;
@@ -1336,6 +1317,7 @@ $hamburger-bar-color: #1c362b;
     &__search-box {
       margin-left: 0;
     }
+    
     &__login-box {
       text-align: unset;
       margin: 1.5em 0 0.7em 0;
@@ -1360,9 +1342,11 @@ $hamburger-bar-color: #1c362b;
         &:nth-child(1) {
           transform: rotate(45deg) translate(5px, 5px);
         }
+        
         &:nth-child(2) {
           opacity: 0;
         }
+        
         &:nth-child(3) {
           transform: rotate(-45deg) translate(5px, -5px);
         }
@@ -1411,6 +1395,7 @@ $hamburger-bar-color: #1c362b;
       }
     }
   }
+  
   .hero {
     &__slide-content {
       left: 5%;
