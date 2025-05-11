@@ -1,12 +1,13 @@
 <script setup>
 const links = [
   { name: 'Főoldal', path: '/' },
-  { name: 'Partnerek', path: '/partnerek' },
-  { name: 'Szolgáltatások', path: '/szolgaltatasok' },
-  { name: 'Dokumentumok', path: '/dokumentumok' },
-  { name: 'Ajánlatkérés', path: '/ajanlatkeres' },
-  { name: 'Kapcsolat', path: '/kapcsolat' },
-  { name: 'Facebook', path: '/', imagePath: '/img/header/facebook.svg' },
+  { name: 'Galéria', path: '/partnerek' },
+  { name: 'Rólunk', path: '/szolgaltatasok' },
+  { name: 'Szolgáltatások', path: '/dokumentumok' },
+  { name: 'Kapcsolat', path: '/ajanlatkeres' },
+  { name: 'Referenciák', path: '/kapcsolat' },
+  { name: 'Partnerek', path: '/kapcsolat' },
+  { name: 'Árajánlatkérés', path: '/kapcsolat' },
 ]
 
 const isMenuOpen = ref(false)
@@ -18,8 +19,8 @@ const isMenuOpen = ref(false)
       <div class="logo-box header-content__logo-box">
         <a href="/" class="header-content__logo-box__link">
           <NuxtImg
-            src="/img/header/logo.svg"
-            alt="Biztos Alkuszom"
+            src="/img/logo.svg"
+            alt="NapiTop Kft"
             class="header-content__logo-box__link__img"
             height="100%"
           />
