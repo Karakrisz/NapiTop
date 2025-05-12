@@ -12,7 +12,7 @@ const currentYear = computed(() => new Date().getFullYear())
         <div class="footer__logo-section">
           <NuxtLink to="/" class="footer__logo-link">
             <NuxtImg
-              src="/img/logo.svg"
+              src="/img/footer-logo.svg"
               alt="Parti Birtok Rendezvényház Logo"
               class="footer__logo"
             />

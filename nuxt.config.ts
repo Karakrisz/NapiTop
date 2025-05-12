@@ -6,7 +6,7 @@ export default defineNuxtConfig({
 
   app: {
     head: {
-      title: 'Digital Seed Studio',
+      title: 'Parti Birtok Rendezványház',
       htmlAttrs: {
         lang: 'hu',
       },
@@ -17,7 +17,7 @@ export default defineNuxtConfig({
           hid: 'description',
           name: 'description',
           content:
-            'SEO-optimalizált weboldal készítés vállalkozásoknakLegyen weboldalad gyors, modern és keresőoptimalizált!',
+            'Rendezvényhelyszín Makón – Parti Birtok: esküvők, születésnapok, céges események gyönyörű környezetben, a Maros-partján.',
         },
         { name: 'format-detection', content: 'telephone=no' },
         { hid: 'robots', name: 'robots', content: 'index, follow' },
