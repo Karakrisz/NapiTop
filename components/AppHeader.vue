@@ -229,6 +229,7 @@ watch(isMenuOpen, (newVal) => {
   padding: 10px;
   z-index: 1001;
   position: relative;
+  bottom: 2.7em;
 }
 
 .bar {

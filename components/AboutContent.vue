@@ -7,11 +7,23 @@ const aboutImage = ref('/img/about.webp')
 // Kliens oldali renderelés ellenőrzése
 const isClient = ref(false)
 const inView = ref(false)
+const isDesktop = ref(false)
+
+// Képernyőszélesség ellenőrzése
+const checkScreenWidth = () => {
+  isDesktop.value = window.innerWidth >= 1200
+}
 
 // Komponens betöltése után
 onMounted(() => {
   // Beállítjuk, hogy kliens oldalon vagyunk
   isClient.value = true
+  
+  // Kezdeti képernyőméret ellenőrzés
+  checkScreenWidth()
+  
+  // Ablakméret változás követése
+  window.addEventListener('resize', checkScreenWidth)
   
   // IntersectionObserver használata a szekcióhoz
   const observer = new IntersectionObserver((entries) => {
@@ -29,6 +41,13 @@ onMounted(() => {
   if (section) {
     observer.observe(section)
   }
+  
+  return () => {
+    if (observer) {
+      observer.disconnect()
+    }
+    window.removeEventListener('resize', checkScreenWidth)
+  }
 })
 </script>
 
@@ -41,7 +60,7 @@ onMounted(() => {
         <!-- Kép konténer - SEO-barát megoldás, az animáció csak kliens oldalon jelenik meg -->
         <div
           class="about__image-wrapper"
-          :class="{ 'is-animated': isClient, 'in-view': isClient && inView }"
+          :class="{ 'is-animated': isClient && isDesktop, 'in-view': isClient && isDesktop && inView }"
         >
           <img
             :src="aboutImage"
@@ -53,7 +72,7 @@ onMounted(() => {
         <!-- Szöveg konténer - SEO-barát megoldás, az animáció csak kliens oldalon jelenik meg -->
         <div
           class="about__text"
-          :class="{ 'is-animated': isClient, 'in-view': isClient && inView }"
+          :class="{ 'is-animated': isClient && isDesktop, 'in-view': isClient && isDesktop && inView }"
         >
           <p class="about__intro">
             A Parti Birtok Rendezvényház
@@ -140,6 +159,18 @@ onMounted(() => {
       opacity: 1;
       transform: translateX(0);
       transition-delay: 0.5s;
+    }
+  }
+}
+
+/* Media query, hogy kisebb képernyőkön ne legyen animáció */
+@media (max-width: 1199px) {
+  .about {
+    &__image-wrapper,
+    &__text {
+      opacity: 1 !important;
+      transform: translateX(0) !important;
+      transition: none !important;
     }
   }
 }
