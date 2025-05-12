@@ -52,7 +52,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <section class="about" id="about">
+  <section class="about about--paddingFormat" id="about">
     <div class="about__container">
       <h2 class="about__title">Rólunk</h2>
 

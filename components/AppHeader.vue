@@ -1,13 +1,13 @@
 <script setup>
 const links = [
   { name: 'Főoldal', path: '/', icon: 'home' },
-  { name: 'Galéria', path: '/partnerek', icon: 'image' },
-  { name: 'Rólunk', path: '/szolgaltatasok', icon: 'users' },
-  { name: 'Szolgáltatások', path: '/dokumentumok', icon: 'briefcase' },
-  { name: 'Kapcsolat', path: '/ajanlatkeres', icon: 'mail' },
-  { name: 'Referenciák', path: '/kapcsolat', icon: 'star' },
-  { name: 'Partnerek', path: '/kapcsolat', icon: 'handshake' },
-  { name: 'Árajánlatkérés', path: '/kapcsolat', icon: 'file-text' },
+  { name: 'Galéria', path: '/galeria', icon: 'image' },
+  { name: 'Rólunk', path: '/rolunk', icon: 'users' },
+  { name: 'Szolgáltatások', path: '/szolgaltatasok', icon: 'briefcase' },
+  { name: 'Kapcsolat', path: '/', icon: 'mail' },
+  { name: 'Referenciák', path: '/', icon: 'star' },
+  { name: 'Partnerek', path: '/', icon: 'handshake' },
+  { name: 'Árajánlatkérés', path: '/', icon: 'file-text' },
 ]
 
 const isMenuOpen = ref(false)
