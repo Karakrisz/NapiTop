@@ -2495,10 +2495,7 @@ const sources$1 = [
                 "loc": "/ajanlatkeres"
             },
             {
-                "loc": "/dokumentumok"
-            },
-            {
-                "loc": "/gepjarmu-biztositas"
+                "loc": "/galeria"
             },
             {
                 "loc": "/"
@@ -2507,25 +2504,13 @@ const sources$1 = [
                 "loc": "/kapcsolat"
             },
             {
-                "loc": "/karbejentes"
-            },
-            {
                 "loc": "/partnerek"
             },
             {
-                "loc": "/rendezvenyszolgalat"
-            },
-            {
-                "loc": "/szemelyes-tanacsadas"
+                "loc": "/rolunk"
             },
             {
                 "loc": "/szolgaltatasok"
-            },
-            {
-                "loc": "/tanulobiztositas"
-            },
-            {
-                "loc": "/utasbiztositas"
             }
         ],
         "sourceType": "app"

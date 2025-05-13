@@ -329,8 +329,9 @@ ul {
   }
 
   &__item {
-    padding: 0 1em;
+    padding: 0 0 .3em 0;
     font-size: 1rem;
+    margin: 0 1em;
   }
 
   &__list__li {

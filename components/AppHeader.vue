@@ -190,7 +190,7 @@ watch(isMenuOpen, (newVal) => {
             <li v-for="link in links" :key="link.path" class="menu__list__li">
               <NuxtLink
                 :to="link.path"
-                :class="['menu__item text-color']"
+                :class="['menu__item text-color animated-link']"
               >
                 <template v-if="link.imagePath">
                   <NuxtImg
@@ -374,6 +374,36 @@ watch(isMenuOpen, (newVal) => {
     opacity: 1;
     transform: translateX(0);
   }
+}
+
+/* Csak az animált link stílust adjuk hozzá */
+.animated-link {
+  position: relative;
+}
+
+.animated-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  height: 2px;
+  width: 100%;
+  background: #000;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease, transform-origin 0s 0.3s;
+}
+
+.animated-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.animated-link:not(:hover)::after {
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease;
 }
 
 /* 1200px alatti nézet */
