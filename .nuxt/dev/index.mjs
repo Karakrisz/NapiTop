@@ -2507,6 +2507,9 @@ const sources$1 = [
                 "loc": "/partnerek"
             },
             {
+                "loc": "/referenciak"
+            },
+            {
                 "loc": "/rolunk"
             },
             {

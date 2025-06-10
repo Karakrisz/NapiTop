@@ -347,6 +347,7 @@ ul {
     }
     &:last-child .menu__item {
       color: #fff;
+      padding-bottom: 0;
     }
     &:last-child:hover {
       background: #181818;
@@ -516,7 +517,7 @@ ul {
 // ------------------------------
 .services {
   padding: 5rem 1rem;
-  background-color: #f9f9f9;
+  background-color: #f9f9f9 !important;
 
   &__container {
     max-width: 1200px;
