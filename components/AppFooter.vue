@@ -26,27 +26,27 @@ const currentYear = computed(() => new Date().getFullYear())
                 <NuxtLink to="/" class="footer__nav-link">Kezdőlap</NuxtLink>
               </li>
               <li class="footer__nav-item">
-                <NuxtLink to="/" class="footer__nav-link">Galéria</NuxtLink>
+                <NuxtLink to="/galeria" class="footer__nav-link">Galéria</NuxtLink>
               </li>
               <li class="footer__nav-item">
-                <NuxtLink to="/" class="footer__nav-link">Rólunk</NuxtLink>
+                <NuxtLink to="/rolunk" class="footer__nav-link">Rólunk</NuxtLink>
               </li>
               <li class="footer__nav-item">
-                <NuxtLink to="/" class="footer__nav-link"
+                <NuxtLink to="/szolgaltatasok" class="footer__nav-link"
                   >Szolgáltatások</NuxtLink
                 >
               </li>
               <li class="footer__nav-item">
-                <NuxtLink to="/" class="footer__nav-link">Kapcsolat</NuxtLink>
+                <NuxtLink to="/kapcsolat" class="footer__nav-link">Kapcsolat</NuxtLink>
               </li>
-              <li class="footer__nav-item">
+              <!-- <li class="footer__nav-item">
                 <NuxtLink to="/" class="footer__nav-link">Referenciák</NuxtLink>
               </li>
               <li class="footer__nav-item">
                 <NuxtLink to="/" class="footer__nav-link">Partnerek</NuxtLink>
-              </li>
+              </li> -->
               <li class="footer__nav-item footer__nav-item--margin-0">
-                <NuxtLink to="/" class="footer__nav-link"
+                <NuxtLink to="/ajanlatkeres" class="footer__nav-link"
                   >Ajánlatkérés</NuxtLink
                 >
               </li>

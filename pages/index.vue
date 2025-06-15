@@ -1,6 +1,7 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import ContactContent from '~/components/ContactContent.vue'
+import PartnersContent from '~/components/PartnersContent.vue'
 
 const slides = ref([
   {
@@ -10,7 +11,7 @@ const slides = ref([
       'Modern, klimatizált rendezvényházunk Makó és Rákos között, csendes környezetben várja vendégeit. 75 fős befogadóképesség, hangtechnika, catering, szállás és még sok más – minden adott egy emlékezetes eseményhez.',
     ctaText: 'Foglalj időpontot még ma!',
     ctaButtonText: 'Időpontfoglalás',
-    ctaLink: '#booking',
+    ctaLink: 'ajanlatkeres',
     imageUrl: '/img/slide/slide.webp',
     imageAlt:
       'Parti Birtok Rendezvényház - Elegáns rendezvényterem terített asztalokkal',
@@ -22,7 +23,7 @@ const slides = ref([
       'Különleges környezetben teremtünk feledhetetlen élményt a nagy napra. Egyedi dekorációs lehetőségek, professzionális hangosítás és letisztult elegancia várja az ifjú párt és a vendégeket a Parti Birtok Rendezvényházban.',
     ctaText: 'Lásd az esküvői csomagajánlatainkat!',
     ctaButtonText: 'Ajánlatkérés',
-    ctaLink: '#wedding-packages',
+    ctaLink: 'ajanlatkeres',
     imageUrl: '/img/slide/slide.webp',
     imageAlt: 'Parti Birtok Rendezvényház - Esküvői helyszín',
   },
@@ -33,7 +34,7 @@ const slides = ref([
       'Tárgyalók, nagy előadótér és nyugodt, zöld környezet segít a produktív munkában. A modern technikai felszereltség és rugalmas térrendezés minden üzleti igényt kielégít. Fedezze fel üzleti csomagjainkat!',
     ctaText: 'Tökéletes helyszín az üzleti sikereinek!',
     ctaButtonText: 'Céges ajánlatok',
-    ctaLink: '#business-events',
+    ctaLink: 'ajanlatkeres',
     imageUrl: '/img/slide/slide.webp',
     imageAlt: 'Parti Birtok Rendezvényház - Céges esemény helyszín',
   },
@@ -44,7 +45,7 @@ const slides = ref([
       'Egyedi, minőségi alapanyagokból készült catering kínálatunk mindenki számára tartogat különlegességeket. A tradicionális magyar ízektől a nemzetközi fogásokig, minden igényt kielégítünk. Diétás és vegetáriánus opciók is elérhetőek.',
     ctaText: 'Kóstold meg különleges menüsorainkat!',
     ctaButtonText: 'Catering ajánlatok',
-    ctaLink: '#catering',
+    ctaLink: 'ajanlatkeres',
     imageUrl: '/img/slide/slide.webp',
     imageAlt: 'Parti Birtok Rendezvényház - Gasztronómiai kínálat',
   },
@@ -55,7 +56,7 @@ const slides = ref([
       'Rendezvénye után nem kell sietnie! Elegáns, légkondicionált szobáink tökéletes pihenést biztosítanak a helyszínen. A rendezvény résztvevői kedvezményes áron vehetik igénybe szálláskínálatunkat.',
     ctaText: 'Biztosítsa a tökéletes pihenést is!',
     ctaButtonText: 'Szállásajánlatok',
-    ctaLink: '#accommodation',
+    ctaLink: 'ajanlatkeres',
     imageUrl: '/img/slide/slide.webp',
     imageAlt: 'Parti Birtok Rendezvényház - Szállás lehetőségek',
   },
@@ -311,7 +312,9 @@ onUnmounted(() => {
   </section>
 
   <ServicesContent />
+  <GalleryContent />
   <AboutContent />
   <DreamPlaceContent />
   <ContactContent />
+  <PartnersContent />
 </template>

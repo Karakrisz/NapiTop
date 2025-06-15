@@ -5,8 +5,8 @@ const links = [
   { name: 'Rólunk', path: '/rolunk', icon: 'users' },
   { name: 'Szolgáltatások', path: '/szolgaltatasok', icon: 'briefcase' },
   { name: 'Kapcsolat', path: '/kapcsolat', icon: 'mail' },
-  { name: 'Referenciák', path: '/referenciak', icon: 'star' },
-  { name: 'Partnerek', path: '/partnerek', icon: 'handshake' },
+  // { name: 'Referenciák', path: '/referenciak', icon: 'star' },
+  // { name: 'Partnerek', path: '/partnerek', icon: 'handshake' },
   { name: 'Árajánlatkérés', path: '/ajanlatkeres', icon: 'file-text' },
 ]
 

@@ -5,7 +5,13 @@ useHead({
 </script>
 
 <template>
-  <section class="services subpage--format" id="services">
-    <div class="services__container">feltöltés alatt...</div>
+  <section class="services subpage--format subpage--format--gallery">
+    <GalleryContent />
   </section>
 </template>
+
+<style lang="scss" scoped>
+.subpage--format--gallery {
+  background: #181818 !important;
+}
+</style>
