@@ -495,8 +495,8 @@ ul {
   }
 
   &__nav-dot {
-    width: 1rem;
-    height: 1rem;
+    width: 1.3em;
+    height: 1.3em;
     border-radius: 50%;
     background-color: rgba(255, 255, 255, 0.5);
     border: none;
@@ -1553,6 +1553,7 @@ $hamburger-bar-color: #1c362b;
     &__slide-content {
       left: 5%;
       max-width: 90%;
+      padding: 1.3em;
     }
 
     &__title {
@@ -1565,7 +1566,7 @@ $hamburger-bar-color: #1c362b;
   }
 
   .services {
-    padding: 3em !important;
+    padding: 1.5em !important;
   }
 
   .about {
