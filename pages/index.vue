@@ -8,7 +8,7 @@ const slides = ref([
     title: 'PARTI BIRTOK RENDEZVÉNYHÁZ',
     subtitle: 'Egy hely, ahol bármikor és bárhmeddig bulizhatsz',
     description:
-      'Modern, klimatizált rendezvényházunk Makó és Rákos között, csendes környezetben várja vendégeit. 75 fős befogadóképesség, hangtechnika, catering, szállás és még sok más – minden adott egy emlékezetes eseményhez.',
+      'Modern, klimatizált rendezvényházunk Makó és Rákos között, csendes környezetben várja vendégeit. 75 fős +30 fő terasz befogadóképesség, hangtechnika, catering, szállás és még sok más – minden adott egy emlékezetes eseményhez.',
     ctaText: 'Foglalj időpontot még ma!',
     ctaButtonText: 'Időpontfoglalás',
     ctaLink: 'ajanlatkeres',
@@ -31,7 +31,7 @@ const slides = ref([
     title: 'CÉGES ESEMÉNYEK & TRÉNINGEK',
     subtitle: 'Inspiráló környezet a sikeres üzleti találkozókhoz',
     description:
-      'Tárgyalók, nagy előadótér és nyugodt, zöld környezet segít a produktív munkában. A modern technikai felszereltség és rugalmas térrendezés minden üzleti igényt kielégít. Fedezze fel üzleti csomagjainkat!',
+      'Nagy előadótér és nyugodt, zöld környezet segít a produktív munkában. A modern technikai felszereltség és rugalmas térrendezés minden üzleti igényt kielégít. Fedezze fel üzleti csomagjainkat!',
     ctaText: 'Tökéletes helyszín az üzleti sikereinek!',
     ctaButtonText: 'Céges ajánlatok',
     ctaLink: 'ajanlatkeres',
@@ -42,7 +42,7 @@ const slides = ref([
     title: 'GASZTRONÓMIAI ÉLMÉNYEK',
     subtitle: 'Ízek és kényeztetés minden alkalomra',
     description:
-      'Egyedi, minőségi alapanyagokból készült catering kínálatunk mindenki számára tartogat különlegességeket. A tradicionális magyar ízektől a nemzetközi fogásokig, minden igényt kielégítünk. Diétás és vegetáriánus opciók is elérhetőek.',
+      'Egyedi, minőségi alapanyagokból készült catering kínálatunk mindenki számára tartogat különlegességeket. A tradicionális magyar ízektől a nemzetközi fogásokig, minden igényt kielégítünk.',
     ctaText: 'Kóstold meg különleges menüsorainkat!',
     ctaButtonText: 'Catering ajánlatok',
     ctaLink: 'ajanlatkeres',

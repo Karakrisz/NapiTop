@@ -106,7 +106,7 @@ onMounted(() => {
 
           <p class="about__paragraph">
             Rendezvényházunk
-            <span class="about__highlight">70 fő befogadására alkalmas</span>,
+            <span class="about__highlight">70 fő (+30 fő terasz) befogadására alkalmas</span>,
             és ideális választás esküvőkre, születésnapokra, céges
             rendezvényekre, csapatépítőkre, vagy akár egy jó hangulatú
             házibulira.
